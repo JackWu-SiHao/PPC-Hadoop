@@ -1,0 +1,183 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+
+\newcommand\mytitle{Homework4}
+\usepackage[dvipdfm,colorlinks=false,
+	pdftitle={\mytitle},
+    pdfauthor={SSLAB}]{hyperref}
+
+\begin{document}
+\title{\Huge \textsc{\mytitle}}
+\date{}
+\maketitle
+
+
+\begin{center}
+\LARGE \bf {Hadoop Programming}~\newline
+\bf {Due Date: 23:59, December 12, Thursday, 2013}
+\end{center}
+In this homework, we show the example running in Ubuntu LTS 13.10 64bit on personal computer and
+installing Hadoop through \url{http://trac.nchc.org.tw/cloud/wiki/Hadoop_Lab1} using Pipes Hadoop framework.
+
+
+\section{Part1:Character count}
+In part1, you will be given a text file(.txt) and you will have to count the number of each character appears.
+You will need to implement Character Count based on the WordCount example. Please insert your code
+in the map() function as shows below.
+
+\lstset{
+  language=C++,
+  frame=single,
+  showspaces=false,
+  showstringspaces=false,
+  basicstyle=\ttfamily
+}
+
+\lstinputlisting{"map_function.cpp"}
+
+\section{Input/Output}
+
+\subsection{Sample Input}
+\begin{verbatim}
+I love PPC.
+I love NCTU.
+\end{verbatim}
+
+\subsection{Sample Output}
+\begin{verbatim}
+.	  2
+C	  2
+I	  2
+N	  1
+P	  2
+T	  1
+U	  1
+e	  2
+l	  2
+o	  2
+v	  2
+\end{verbatim}
+
+\section{Part2:K-means Clustering}
+k-means clustering is a method of vector quantization originally from signal processing, that is popular for cluster analysis in data mining. k-means clustering aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest distance, serving as a prototype of the cluster.
+
+\section{Description}
+In this homework, you will implement a simpler version of K-means Clustering algorithm. The way of implementation is similar to the WordCount. You will
+need to modify to corresponding map() and reduce() function.
+Initially, representatives points will be given. Then you will have to compare other points' distance to the given
+representatives. If the distance is closer to one of the representative (say A), the point belongs to GroupA. Finally, you will output each data
+point and its group.
+Notes: There are only two representatives in this homework, A and B. So there will be only GroupA and GroupB.
+
+\section{Input/Output}
+\subsection{Input Format}
+\begin{enumerate}
+\item There are two lines separated by a comma.
+\item Each data is separated by a space.
+\item Each column represents the distance to point A, B, C...respectively.
+\end{enumerate}
+
+\subsection{Sample Input}
+\begin{verbatim}
+A 0 4 100 50 200,
+B 10 0 60 70 90
+\end{verbatim}
+In row 1, meaning that distance A's distance to A is 0, to B 4, to C is 100, to D is 50, to E is 200.
+Same as in row 2.
+
+\subsection{Output Format}
+\begin{enumerate}
+\item Each row starts with data point name followed by its group name.
+\end{enumerate}
+
+\subsection{Sample Output}
+\begin{verbatim}
+A	  GroupA
+B	  GroupB
+C	  GroupB
+D	  GroupA
+E	  GroupB
+\end{verbatim}
+
+\section{XML config file}
+Create a .xml config file for each part of this homework. Place it in the home directory of Hadoop.
+You will need it to run your hadoop program. For example as wordcount.xml
+
+\lstset{
+  language=XML,
+  frame=single,
+  showspaces=false,
+  showstringspaces=false,
+  basicstyle=\ttfamily
+}
+\lstinputlisting{"wordcount.xml"}
+
+\section{Creating makefile to compile the program}
+You will create a makefile to compile your program.
+And put the executable wordcount file into your HDFS after the compilation(here we take wordcount as an example).
+\lstset{
+  language=Makefile,
+  frame=single,
+  showspaces=false,
+  showstringspaces=false,
+  basicstyle=\ttfamily
+}
+\lstinputlisting{"makefile"}
+
+\section{Run the program}
+At your hadoop home directory. Follow the instruction below.
+\lstset{
+  language=C++,
+  frame=single,
+  showspaces=false,
+  showstringspaces=false,
+  basicstyle=\ttfamily
+}
+\lstinputlisting{"run.cpp"}
+
+\section{Environment}
+We provide three ways to let you work on your homework.
+\begin{enumerate}
+\item Install Hadoop in your computer. \url{http://trac.nchc.org.tw/cloud/wiki/Hadoop_Lab1}
+\item Using NCHC \url{http://hadoop.nchc.org.tw/}
+\item Using NCTU Openstack. (140.113.98.51. account:studentID, pass:studentID)
+For 2, 3 we don't guarantee the system or connection will be stable. We suggest you to install Hadoop in your computer.
+\end{enumerate}
+Also you can use either way of the following Hadoop framework
+\begin{enumerate}
+\item Pipes
+\item Streaming
+\end{enumerate}
+
+\section{Submission}
+Please submit the following files to e3 system and package them into a directory named studentID-hw4.zip.
+\begin{enumerate}
+\item studentID-charcount.cpp
+\item studentID-cluster.cpp
+\item makefile
+\item description.txt
+\end{enumerate}
+~\newline
+In description.txt, please provide us your running platform and the Hadoop framework you use.
+\item Your running platform
+\item The Hadoop framework you use
+
+\section{Grading Policy}
+\begin{enumerate}
+\item If your output is not correct or your program cannot compile or running, you will get 0 in that part of homework.
+\item You will get full score in that part of homework if your answer is correct.
+\item 40 points for part1.
+\item 60 points for part2.
+\end{enumerate}
+
+\section{Reference}
+[1]Install Hadoop: \url{http://trac.nchc.org.tw/cloud/wiki/Hadoop_Lab1}~\newline
+[2]Hadoop Pipes: \url{http://cs.smith.edu/dftwiki/index.php/Hadoop_Tutorial_2.2_--_Running_C%2B%2B_Programs_on_Hadoop#Makefile}~\newline
+[3]Hadoop Streaming: \url{http://hadoop.apache.org/docs/r1.1.2/streaming.html}~\newline
+[4]NCHC Hadoop: \url{http://hadoop.nchc.org.tw/}
+
+\end{document}
+
