@@ -16,7 +16,7 @@ Hadoop for PPC course
 	//run
     hadoop jar ~/java/20HadoopWordCount/build/jar/WordCount-1.0.jar input/input.txt output
 
-### Run locally on Single Node
+### Run locally on Single Node using Pipes
 
 - Install Hadoo
 
@@ -35,4 +35,12 @@ Hadoop for PPC course
 
 
     	bin/hadoop pipes -conf wordcount.xml -input examples/input -output examples/output
+    	
+
+### Run locally on Single Node using Streaming
+	
+	
+	hadoop jar /opt/hadoop/contrib/streaming/hadoop-0.20.2-streaming.jar -input shakespeare_poem.txt -output output -mapper mapper -reducer reducer -file ./mapper -file ./reducer
+	
+
 
