@@ -9,5 +9,6 @@ for username in $usernames
 do
 	pass=$(mkpasswd -m SHA-512 $username)
 	sudo useradd -m -s /bin/bash -g root $username -p $pass
+	sudo chmod -R 700 /home/$username
 #	sudo chage -d 0 $username
 done
